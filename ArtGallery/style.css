@@ -1,0 +1,190 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    background-color: #111;
+    color: white;
+    align-items: center;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.searchbox {
+    width: fit-content;
+    height: 100px;
+    margin: 0 auto;
+}
+
+
+/* Heading */
+
+h1 {
+    text-align: center;
+
+    font-size: 40px;
+    letter-spacing: 8px;
+
+    margin-bottom: 40px;
+}
+
+
+/* Gallery */
+
+.gallery {
+    max-width: 1200px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 25px;
+}
+
+
+/* Artwork Card */
+
+.art-card {
+    background-color: #222;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    text-align: center;
+
+    transition: transform 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+
+/* Artwork Image */
+
+.art-card img {
+    width: 100%;
+
+    height: 350px;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+/* Artwork Title */
+
+.art-card h2 {
+    font-size: 20px;
+
+    margin: 18px 5px;
+
+    color: white;
+}
+
+
+/* Hover Effect */
+
+.art-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 10px 30px rgba(255, 255, 255, 0.2);
+}
+
+
+/* Tablet */
+
+@media (max-width: 900px) {
+
+    .gallery {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+}
+
+
+/* Small Tablet */
+
+@media (max-width: 700px) {
+
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+/* Mobile */
+
+@media (max-width: 500px) {
+
+    body {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 28px;
+
+        letter-spacing: 5px;
+    }
+
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+.categories {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+.category-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background-color: #eee;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.category-btn:hover,
+.category-btn.active {
+    background-color: #222;
+    color: white;
+}
+
+.art-card {
+    position: relative;
+}
+
+.favorite {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+
+    width: 40px;
+    height: 40px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: white;
+    color: #555;
+
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.favorite.active {
+    color: red;
+}

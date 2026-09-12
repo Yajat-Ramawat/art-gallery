@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Art Gallery</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="icon.png">
+</head>
+
+<body>
+
+    <h1>ART GALLERY</h1>
+
+    <div class="categories">
+    <button class="category-btn active" data-category="all">All</button>
+    <button class="category-btn" data-category="abstract">Abstract</button>
+    <button class="category-btn" data-category="nature">Nature</button>
+    <button class="category-btn" data-category="portrait">Portrait</button>
+    <button class="category-btn" data-category="modern">Modern</button>
+    <button class="category-btn" data-category="favorites">❤️ Favorites</button>
+</div>
+
+
+    <div class="searchbox">
+        <input type="text" id="searchInput" placeholder="Search...">
+    </div>
+
+    <div class="gallery">
+
+        <div class="art-card" data-category="abstract">
+    <button class="favorite">♡</button>
+    <img alt="Dreamscape">
+    <h2>Dreamscape</h2>
+</div>
+
+<div class="art-card" data-category="nature">
+    <button class="favorite">♡</button>
+    <img alt="Golden Horizon">
+    <h2>Golden Horizon</h2>
+</div>
+
+<div class="art-card" data-category="portrait">
+    <button class="favorite">♡</button>
+    <img alt="Silent Thoughts">
+    <h2>Silent Thoughts</h2>
+</div>
+
+<div class="art-card" data-category="nature">
+    <button class="favorite">♡</button>
+    <img alt="Ocean Dreams">
+    <h2>Ocean Dreams</h2>
+</div>
+
+<div class="art-card" data-category="modern">
+    <button class="favorite">♡</button>
+    <img alt="City Lights">
+    <h2>City Lights</h2>
+</div>
+
+<div class="art-card" data-category="abstract">
+    <button class="favorite">♡</button>
+    <img alt="Midnight Blue">
+    <h2>Midnight Blue</h2>
+</div>
+
+<div class="art-card" data-category="nature">
+    <button class="favorite">♡</button>
+    <img alt="Wild Beauty">
+    <h2>Wild Beauty</h2>
+</div>
+
+<div class="art-card" data-category="abstract">
+    <button class="favorite">♡</button>
+    <img alt="Inner World">
+    <h2>Inner World</h2>
+</div>
+
+<div class="art-card" data-category="nature">
+    <button class="favorite">♡</button>
+    <img alt="Serenity">
+    <h2>Serenity</h2>
+</div>
+
+<div class="art-card" data-category="modern">
+    <button class="favorite">♡</button>
+    <img alt="Reflections">
+    <h2>Reflections</h2>
+</div>
+
+<div class="art-card" data-category="abstract">
+    <button class="favorite">♡</button>
+    <img alt="Lost in Color">
+    <h2>Lost in Color</h2>
+</div>
+
+<div class="art-card" data-category="nature">
+    <button class="favorite">♡</button>
+    <img alt="Morning Light">
+    <h2>Morning Light</h2>
+</div>
+
+<div class="art-card" data-category="nature">
+    <button class="favorite">♡</button>
+    <img alt="Beyond the Sky">
+    <h2>Beyond the Sky</h2>
+</div>
+
+<div class="art-card" data-category="nature">
+    <button class="favorite">♡</button>
+    <img alt="Hidden Garden">
+    <h2>Hidden Garden</h2>
+</div>
+
+<div class="art-card" data-category="abstract">
+    <button class="favorite">♡</button>
+    <img alt="Purple Rain">
+    <h2>Purple Rain</h2>
+</div>
+
+<div class="art-card" data-category="abstract">
+    <button class="favorite">♡</button>
+    <img alt="Infinite Space">
+    <h2>Infinite Space</h2>
+</div>
+
+<div class="art-card" data-category="modern">
+    <button class="favorite">♡</button>
+    <img alt="The Wanderer">
+    <h2>The Wanderer</h2>
+</div>
+
+<div class="art-card" data-category="abstract">
+    <button class="favorite">♡</button>
+    <img alt="Golden Dreams">
+    <h2>Golden Dreams</h2>
+</div>
+
+<div class="art-card" data-category="modern">
+    <button class="favorite">♡</button>
+    <img alt="Colors of Life">
+    <h2>Colors of Life</h2>
+</div>
+
+<div class="art-card" data-category="abstract">
+    <button class="favorite">♡</button>
+    <img alt="The Unknown">
+    <h2>The Unknown</h2>
+</div>
+
+
+    </div>
+
+    <script>
+        // Select all artwork images
+        const artCards = document.querySelectorAll(".art-card");
+const categoryButtons = document.querySelectorAll(".category-btn");
+const searchInput = document.getElementById("searchInput");
+
+// Get favorites from localStorage
+let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+
+// -----------------------------
+// IMAGE LOADING
+// -----------------------------
+
+const images = document.querySelectorAll(".art-card img");
+
+images.forEach((image, index) => {
+    image.src = `https://picsum.photos/400/500?random=${index}`;
+});
+
+
+// -----------------------------
+// FAVORITES
+// -----------------------------
+
+artCards.forEach((card) => {
+
+    const title = card.querySelector("h2").textContent;
+    const favoriteButton = card.querySelector(".favorite");
+
+    // Check if already favorite
+    if (favorites.includes(title)) {
+        favoriteButton.textContent = "♥";
+        favoriteButton.classList.add("active");
+    }
+
+    favoriteButton.addEventListener("click", () => {
+
+        if (favorites.includes(title)) {
+
+            // Remove from favorites
+            favorites = favorites.filter(item => item !== title);
+
+            favoriteButton.textContent = "♡";
+            favoriteButton.classList.remove("active");
+
+        } else {
+
+            // Add to favorites
+            favorites.push(title);
+
+            favoriteButton.textContent = "♥";
+            favoriteButton.classList.add("active");
+        }
+
+        // Save to localStorage
+        localStorage.setItem("favorites", JSON.stringify(favorites));
+
+    });
+
+});
+
+
+// -----------------------------
+// CATEGORY FILTER
+// -----------------------------
+
+categoryButtons.forEach((button) => {
+
+    button.addEventListener("click", () => {
+
+        const selectedCategory = button.dataset.category;
+
+        // Active button
+        categoryButtons.forEach(btn => {
+            btn.classList.remove("active");
+        });
+
+        button.classList.add("active");
+
+
+        artCards.forEach((card) => {
+
+            const category = card.dataset.category;
+            const title = card.querySelector("h2").textContent;
+
+            if (selectedCategory === "all") {
+
+                card.style.display = "block";
+
+            } else if (selectedCategory === "favorites") {
+
+                if (favorites.includes(title)) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+
+            } else {
+
+                if (category === selectedCategory) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+
+            }
+
+        });
+
+    });
+
+});
+
+    </script>
+
+</body>
+
+</html>
